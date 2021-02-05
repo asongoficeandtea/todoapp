@@ -8,6 +8,8 @@ db = SQLAlchemy(app)
 class Task(db.Model):
     task_name = db.Column(db.String(100), primary_key=True)
 
+db.create_all()
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def home():
