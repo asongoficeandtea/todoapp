@@ -5,7 +5,7 @@ from app import app, db, Task
 
 class TestBase(TestCase):
     def create_app(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/testdb'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://alimatea7:mariam@localhost/testdb'
         return app
     
     def setUp(self):
