@@ -2,7 +2,7 @@
 
 ## Project overview
 
-> The aim of this project was to design a web application with CRUD functionality. 
+> The aim of this project was to design a web application with CRUD functionality.
 
 ### Design Process
 
@@ -25,3 +25,10 @@
 
 The unit testing portion was a significant challenge at first. I had issues with tests failing and understanding how to rectify the issues. I did not reach the goal I hoped of all tests passing however I did make pogress. The tests started off with only 2 of the tests passing out of 6. I managed to get that number to 4 tests passing and two failing.
 
+### Risk Assessment
+
+## Conclusion
+
+> I did enjoy writing the code and understanding how an application is built and deployed utilising cloud-enabling technology. I have an improved knowledge of automation and how to set up automation in my processes. This was very evident in unit testing and this module was incredibly useful for my learning process. 
+
+> In my next project, I aim to develop an app utilising two database tables in order to produce applications with extended functionality. 
