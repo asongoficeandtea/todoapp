@@ -6,10 +6,7 @@
 
 ### Design Process
 
-> I started with designing and ER diagram and first design was a table called List which would be the parent table and a table called Task which would be the child table. The design was meant to allow a user to create different lists for different purposes such as a list for shopping, one for daily tasks and another for weekly goals. These images demonstrate the first two designs.
-
-![ERD](Desktop/Images/drawio.jpeg)
-![ERD](Desktop/Images/lucidchart.jpeg)
+> I started with designing and ER diagram and first design was a table called List which would be the parent table and a table called Task which would be the child table. The design was meant to allow a user to create different lists for different purposes such as a list for shopping, one for daily tasks and another for weekly goals.
 
 > In the end due to issues in understanding relationship configuration between the two tables led me to create an app with one table in order to create tasks. I decided to do so in order to create a functioning product but also demonstrate the extent of my learning within this training course. 
 
@@ -27,8 +24,15 @@ The unit testing portion was a significant challenge at first. I had issues with
 
 ### Risk Assessment
 
+* Limitations
+    * No personalisation to the user
+    * No CSRF Protection as form.hidden_tag() and secret key not utilised
+    * No form of encryption utilised as information provided by the user is not intended to be sensitive
+
 ## Conclusion
 
 > I did enjoy writing the code and understanding how an application is built and deployed utilising cloud-enabling technology. I have an improved knowledge of automation and how to set up automation in my processes. This was very evident in unit testing and this module was incredibly useful for my learning process. 
 
 > In my next project, I aim to develop an app utilising two database tables in order to produce applications with extended functionality. 
+
+
