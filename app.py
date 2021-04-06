@@ -5,8 +5,18 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/datadb'
 db = SQLAlchemy(app)
 
+class User(db.Model)
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(10))
+    tasks = db.relationship('Task', backref='')
+
+
 class Task(db.Model):
-    task_name = db.Column(db.String(100), primary_key=True)
+    task_id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String(100))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
 
 db.create_all()
 
