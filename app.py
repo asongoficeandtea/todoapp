@@ -8,7 +8,7 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(10))
+    username = db.Column(db.String(10), unique=True)
     tasks = db.relationship('Task', backref='user')
 
 
@@ -24,12 +24,12 @@ def user():
         user = User(username=request.form.get("username"))
         db.session.add(user)
         db.session.commit()
-    return render_template('home.html')
+    return render_template('user.html')
         
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.form:
-        task = Task(task_name=request.form.get("task_name"), user = User.query.filter_by(username=user))
+        task = Task(task_name=request.form.get("task_name"), user = User.query.filter_by(username).first())
         db.session.add(task)
         db.session.commit()
     tasks = Task.query.all()
