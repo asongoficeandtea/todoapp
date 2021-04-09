@@ -4,9 +4,16 @@
 <h2>List Form</h2>
 <br>
 <form method='POST' action="/">
+    <input type="text" name="username">
+    <input type="submit" value="Create User">
+</form>
+<br>
+<br>
+<form method='POST' action="./home">
     <input type="text" name="task_name">
     <input type="submit" value="Create Task">
 </form>
+<br>
 <h3> Task List</h3>
 {% for task in tasks %}
 <p>{{ task.task_name }}</p>

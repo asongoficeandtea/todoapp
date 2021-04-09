@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/datadb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gahDej14b@localhost/tododb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
 
-class User(db.Model)
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(10))
-    tasks = db.relationship('Task', backref='')
+    username = db.Column(db.String(10))
+    tasks = db.relationship('Task', backref='user')
 
 
 class Task(db.Model):
@@ -17,14 +18,18 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
-
-db.create_all()
-
 @app.route('/', methods=['GET', 'POST'])
+def user():
+    if request.form:
+        user = User(username=request.form.get("username"))
+        db.session.add(user)
+        db.session.commit()
+    return render_template('home.html')
+        
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.form:
-        task = Task(task_name=request.form.get("task_name"))
+        task = Task(task_name=request.form.get("task_name"), user = User.query.filter_by(username=user))
         db.session.add(task)
         db.session.commit()
     tasks = Task.query.all()
