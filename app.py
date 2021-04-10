@@ -29,7 +29,7 @@ def user():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.form:
-        task = Task(task_name=request.form.get("task_name"), user = User.query.filter_by(username).first())
+        task = Task(task_name=request.form.get("task_name"), user = User.query.first())
         db.session.add(task)
         db.session.commit()
     tasks = Task.query.all()
