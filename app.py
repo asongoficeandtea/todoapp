@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gahDej14b@localhost/tododb'
+app.config['SQLALCHEMY_DATABASE_URI'] = $DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
 
