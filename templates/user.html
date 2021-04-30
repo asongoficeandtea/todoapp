@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>List Form</h2>
+<br>
+<form method='POST' action="/">
+    <input type="text" name="username">
+    <input type="submit" value="Create User">
+</form>
+<br>
+<a href="/home" target="_self"> Tasks </a>
+<br>
+<br>
+{% endblock content %}
