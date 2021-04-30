@@ -1,20 +1,36 @@
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://alimatea7:mariam@localhost/datadb'
+app.config['SQLALCHEMY_DATABASE_URI'] = $DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app)
 
-class Task(db.Model):
-    task_name = db.Column(db.String(100), primary_key=True)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(10), unique=True)
+    tasks = db.relationship('Task', backref='user')
 
-db.create_all()
+
+class Task(db.Model):
+    task_id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String(100))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
 
 @app.route('/', methods=['GET', 'POST'])
+def user():
+    if request.form:
+        user = User(username=request.form.get("username"))
+        db.session.add(user)
+        db.session.commit()
+    return render_template('user.html')
+        
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.form:
-        task = Task(task_name=request.form.get("task_name"))
+        task = Task(task_name=request.form.get("task_name"), user = User.query.first())
         db.session.add(task)
         db.session.commit()
     tasks = Task.query.all()
@@ -39,4 +55,4 @@ def delete():
 
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0')
