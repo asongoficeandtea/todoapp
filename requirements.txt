@@ -7,3 +7,5 @@ pytest
 pytest-cov
 flask-testing
 pymysql
+itsdangerous==2.0.1
+markupsafe==2.0.1
