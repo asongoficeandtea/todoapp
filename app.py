@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'DATABASE_CONNECTOR'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_CONNECTOR')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,15 +27,18 @@ def user():
         db.session.add(user)
         db.session.commit()
     return render_template('user.html')
-        
+
+
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.form:
-        task = Task(task_name=request.form.get("task_name"), user = User.query.first())
+        task = Task(task_name=request.form.get(
+            "task_name"), user=User.query.first())
         db.session.add(task)
         db.session.commit()
     tasks = Task.query.all()
     return render_template('home.html', tasks=tasks)
+
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
@@ -45,6 +49,7 @@ def update():
     db.session.commit()
     return redirect('/')
 
+
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
     task_name = request.form.get("task_name")
@@ -54,5 +59,5 @@ def delete():
     return redirect('/')
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(debug=True, port=5000)
